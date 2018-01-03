@@ -15,15 +15,21 @@ import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.simonkay.javaframework.configurations.webdriver.Driver;
 import com.simonkay.javaframework.configurations.webdriver.WaitConditions;
+import com.simonkay.javaframework.utility.localisation.LocaleHelper;
 
 public abstract class AbstractBasePageObject extends LoadableComponent<AbstractBasePageObject> {
+	
+	@Autowired
+	protected LocaleHelper localeHelper;
+	
 	private static final Logger LOG = LogManager.getLogger(AbstractBasePageObject.class);
-	private final WebDriver driver;
-	private final NgWebDriver ngDriver;
+	protected final WebDriver driver;
+	protected final NgWebDriver ngDriver;
 	private final int timeToWait;
 	private final WebDriverWait wait;
 	private final String url;
@@ -50,6 +56,7 @@ public abstract class AbstractBasePageObject extends LoadableComponent<AbstractB
 		LOG.info("Navigating to page " + url);
 		driver.get(url);
 		wait.until(ExpectedConditions.urlToBe(url));
+		
 	}
 
 	public void set_text(WebElement ele, String value) {
@@ -93,6 +100,10 @@ public abstract class AbstractBasePageObject extends LoadableComponent<AbstractB
 			throw new NoSuchElementException(ex.getMessage()
 					+ "\n\nPageSource:\n\n" + getDriver().getPageSource());
 		}
+	}
+	
+	public void wait_for_angular() {
+		this.ngDriver.waitForAngularRequestsToFinish();
 	}
 	
     /**

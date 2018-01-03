@@ -268,7 +268,7 @@
 							<value>http://jira-here?id={}</value>
 						</property>
 					</systemProperties>
-					<forkCount>1</forkCount>
+					<forkCount>${parallelfork.count}</forkCount>
 					<reuseForks>false</reuseForks>
 					<includes>
 						<include>**/*IT.class</include>

@@ -1,6 +1,7 @@
 package com.simonkay.javaframework.configurations.springconfig;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,10 +14,7 @@ import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.simonkay.javaframework.configurations.CucumberWorld;
 import com.simonkay.javaframework.configurations.FrameworkProperties;
 import com.simonkay.javaframework.configurations.webdriver.Driver;
-import com.simonkay.javaframework.pageobjects.PuppyAdoptionHomePage;
-import com.simonkay.javaframework.pageobjects.PuppyCartPage;
-import com.simonkay.javaframework.pageobjects.PuppyInformationPage;
-import com.simonkay.javaframework.pageobjects.PuppyOrderPage;
+import com.simonkay.javaframework.pageobjects.AngularCalculatorPage;
 import com.simonkay.javaframework.utility.exceptions.InvalidDriverTypeSelectedException;
 import com.simonkay.javaframework.utility.localisation.LocaleHelper;
 import com.simonkay.javaframework.utility.reporting.ReportEnvironmentHelper;
@@ -47,6 +45,7 @@ public class SpringConfig {
 		return wd;
 	}
 	
+	@Bean
 	@Scope("singleton")
 	public NgWebDriver ngDriver() {
 		NgWebDriver ng = new NgWebDriver(driver());
@@ -57,52 +56,25 @@ public class SpringConfig {
 	public FrameworkProperties properties() {
 		return new FrameworkProperties();
 	}
-
-	@Bean
-    public PuppyAdoptionHomePage puppyAdoptionHomePage() {
-        return new PuppyAdoptionHomePage(
-        		ngDriver(),
-                driver(),               
-                properties().seleniumImplicitWaitTime(),
-                properties().getTestServerBaseAddress()
-        );
-    }
+	
 
 	
 	@Bean
-    public PuppyInformationPage puppyInformationPage() {
-        return new PuppyInformationPage(
-        		ngDriver(),
-                driver(),               
-                properties().seleniumImplicitWaitTime(),
-                properties().getTestServerBaseAddress()
-        );
-    }
-	
-	@Bean
-    public PuppyCartPage puppyCartPage() {
-        return new PuppyCartPage(
-        		ngDriver(),
-                driver(),               
-                properties().seleniumImplicitWaitTime(),
-                properties().getTestServerBaseAddress()
-        );
-    }
-	
-	@Bean
-    public PuppyOrderPage puppyOrderPage() {
-        return new PuppyOrderPage(
-        		ngDriver(),
-                driver(),               
-                properties().seleniumImplicitWaitTime(),
-                properties().getTestServerBaseAddress()
-        );
-	}
-	
-	@Bean
+	@Scope("singleton")
 	public LocaleHelper localeHelper() {
 		return new LocaleHelper(properties().getApplicationLanguage());
 	}
+	
+	@Bean
+	public AngularCalculatorPage angularLoginPage() {
+		 return new AngularCalculatorPage(
+				 	ngDriver(),
+	                driver(),               
+	                properties().seleniumImplicitWaitTime(),
+	                properties().getTestServerBaseAddress()
+	        );
+	}
+
 	
 	@Bean
 	public ReportEnvironmentHelper envHelper() throws Exception {
@@ -115,10 +87,8 @@ public class SpringConfig {
 		props.put("Selenium Wait:", String.valueOf(properties().seleniumImplicitWaitTime()));
 		props.put("Product Name:", String.valueOf(properties().getProductName()));
 		props.put("Database Conn:", String.valueOf(properties().getDatabaseConn()));
-		props.put("Angular Frontend:", String.valueOf(properties().getAngular()));	
-		
+		props.put("Angular Frontend:", String.valueOf(properties().getAngular()));			
 		return new ReportEnvironmentHelper(props);
-
 	}
 
 	

@@ -1,6 +1,7 @@
 package com.simonkay.javaframework.stepdefinitions;
 
 import com.simonkay.javaframework.datamodels.Order;
+import com.simonkay.javaframework.datamodels.User;
 import com.simonkay.javaframework.dataproviders.DataProviderInjector;
 
 import cucumber.api.Scenario;
@@ -22,6 +23,11 @@ public class GeneralSteps extends AbstractBaseStepDefinition {
 		Order order = new Order("Credit card", new DataProviderInjector());
 		cucumberWorld.addNewOrder(orderAlias, order);    
 	}
-
+	
+	@Given("The user \"([^\"]*)\" exists$") 
+	public void the_user_exists(String userAlias) throws Throwable {
+		User user = new User();
+		cucumberWorld.addNewUser(userAlias, user);		
+	}
 
 }
