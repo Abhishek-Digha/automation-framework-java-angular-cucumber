@@ -16,21 +16,25 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.paulhammant.ngwebdriver.NgWebDriver;
+import com.simonkay.javaframework.configurations.webdriver.Driver;
 import com.simonkay.javaframework.configurations.webdriver.WaitConditions;
 
 public abstract class AbstractBasePageObject extends LoadableComponent<AbstractBasePageObject> {
 	private static final Logger LOG = LogManager.getLogger(AbstractBasePageObject.class);
 	private final WebDriver driver;
+	private final NgWebDriver ngDriver;
 	private final int timeToWait;
 	private final WebDriverWait wait;
 	private final String url;
 	
 
-	public AbstractBasePageObject(WebDriver driver, int implicitWait, String url) {
+	public AbstractBasePageObject(NgWebDriver ngdriver, Driver driver, int implicitWait, String url) {
 		this.driver = driver;
 		timeToWait = implicitWait;
 		wait = new WebDriverWait(getDriver(), timeToWait);
 		this.url = url;
+		ngDriver = ngdriver;
 	}
 
 	public WebDriver getDriver() {

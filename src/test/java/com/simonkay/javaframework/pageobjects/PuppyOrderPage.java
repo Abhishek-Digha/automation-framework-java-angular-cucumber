@@ -2,11 +2,12 @@ package com.simonkay.javaframework.pageobjects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.paulhammant.ngwebdriver.NgWebDriver;
+import com.simonkay.javaframework.configurations.webdriver.Driver;
 import com.simonkay.javaframework.datamodels.Order;
 
 public class PuppyOrderPage extends AbstractBasePageObject {
@@ -28,8 +29,8 @@ public class PuppyOrderPage extends AbstractBasePageObject {
 	@FindBy(id = "order_pay_type")
 	private WebElement orderPaymentTypeDropdown;
 
-	public PuppyOrderPage(WebDriver driver, int implicitWait, String url) {
-		super(driver, implicitWait, url + relativePath);
+	public PuppyOrderPage(NgWebDriver ngdriver, Driver driver, int implicitWait, String url) {
+		super(ngdriver, driver, implicitWait, url + relativePath);
 		PageFactory.initElements(driver, this);
 		LOG.info("Creating new PuppyCartPage, PageElements initialized!");
 	}

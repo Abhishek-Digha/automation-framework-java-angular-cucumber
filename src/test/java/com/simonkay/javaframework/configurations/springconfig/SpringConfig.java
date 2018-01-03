@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 
+import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.simonkay.javaframework.configurations.CucumberWorld;
 import com.simonkay.javaframework.configurations.FrameworkProperties;
 import com.simonkay.javaframework.configurations.webdriver.Driver;
@@ -45,6 +46,12 @@ public class SpringConfig {
 		}
 		return wd;
 	}
+	
+	@Scope("singleton")
+	public NgWebDriver ngDriver() {
+		NgWebDriver ng = new NgWebDriver(driver());
+		return ng;
+	}
 
 	@Bean
 	public FrameworkProperties properties() {
@@ -54,6 +61,7 @@ public class SpringConfig {
 	@Bean
     public PuppyAdoptionHomePage puppyAdoptionHomePage() {
         return new PuppyAdoptionHomePage(
+        		ngDriver(),
                 driver(),               
                 properties().seleniumImplicitWaitTime(),
                 properties().getTestServerBaseAddress()
@@ -64,6 +72,7 @@ public class SpringConfig {
 	@Bean
     public PuppyInformationPage puppyInformationPage() {
         return new PuppyInformationPage(
+        		ngDriver(),
                 driver(),               
                 properties().seleniumImplicitWaitTime(),
                 properties().getTestServerBaseAddress()
@@ -73,6 +82,7 @@ public class SpringConfig {
 	@Bean
     public PuppyCartPage puppyCartPage() {
         return new PuppyCartPage(
+        		ngDriver(),
                 driver(),               
                 properties().seleniumImplicitWaitTime(),
                 properties().getTestServerBaseAddress()
@@ -82,6 +92,7 @@ public class SpringConfig {
 	@Bean
     public PuppyOrderPage puppyOrderPage() {
         return new PuppyOrderPage(
+        		ngDriver(),
                 driver(),               
                 properties().seleniumImplicitWaitTime(),
                 properties().getTestServerBaseAddress()

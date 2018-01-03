@@ -2,18 +2,21 @@ package com.simonkay.javaframework.configurations.webdriver;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.simonkay.javaframework.utility.exceptions.InvalidDriverTypeSelectedException;
 
 public class Driver extends EventFiringWebDriver {
 	private static final Logger LOG = LogManager.getLogger(EventFiringWebDriver.class);
 
 	private static WebDriver CURRENT_DRIVER;
+
 
 	private static final Thread SHUTDOWN_HOOK = new Thread() {	
 		@Override
@@ -22,6 +25,7 @@ public class Driver extends EventFiringWebDriver {
 			killDriver();
 		}
 	};
+	
 
 	@Override
 	public void close() {

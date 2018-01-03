@@ -2,10 +2,12 @@ package com.simonkay.javaframework.pageobjects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.paulhammant.ngwebdriver.NgWebDriver;
+import com.simonkay.javaframework.configurations.webdriver.Driver;
 
 public class PuppyAdoptionHomePage extends AbstractBasePageObject {
 	private static final Logger LOG = LogManager.getLogger(PuppyAdoptionHomePage.class);
@@ -17,8 +19,8 @@ public class PuppyAdoptionHomePage extends AbstractBasePageObject {
 	@FindBy(id = "notice")
 	private WebElement adoptionSuccessfulMessage;
 
-	public PuppyAdoptionHomePage(WebDriver driver, int implicitWait, String url) {
-		super(driver, implicitWait, url + relativePath);
+	public PuppyAdoptionHomePage(NgWebDriver ngdriver, Driver driver, int implicitWait, String url) {
+		super(ngdriver, driver, implicitWait, url + relativePath);
 		PageFactory.initElements(driver, this);
 		LOG.info("Creating new PuppyAdoptionHomePage, PageElements initialized!");
 	}
