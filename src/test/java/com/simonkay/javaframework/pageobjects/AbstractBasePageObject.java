@@ -17,8 +17,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.paulhammant.ngwebdriver.NgWebDriver;
-import com.simonkay.javaframework.configurations.webdriver.Driver;
+import com.github.sergueik.jprotractor.NgWebDriver;
 import com.simonkay.javaframework.configurations.webdriver.WaitConditions;
 import com.simonkay.javaframework.utility.localisation.LocaleHelper;
 
@@ -28,33 +27,35 @@ public abstract class AbstractBasePageObject extends LoadableComponent<AbstractB
 	protected LocaleHelper localeHelper;
 	
 	private static final Logger LOG = LogManager.getLogger(AbstractBasePageObject.class);
-	protected final WebDriver driver;
 	protected final NgWebDriver ngDriver;
 	private final int timeToWait;
 	private final WebDriverWait wait;
 	private final String url;
 	
+	protected String getUrl() {
+		return this.url;
+	}
+	
 
-	public AbstractBasePageObject(NgWebDriver ngdriver, Driver driver, int implicitWait, String url) {
-		this.driver = driver;
+	public AbstractBasePageObject(NgWebDriver ngdriver, int implicitWait, String url) {
+		ngDriver = ngdriver;
 		timeToWait = implicitWait;
 		wait = new WebDriverWait(getDriver(), timeToWait);
 		this.url = url;
-		ngDriver = ngdriver;
 	}
 
 	public WebDriver getDriver() {
-		return driver;
+		return ngDriver;
 	}
 
 	public boolean does_element_exist(By loc) {
 		LOG.info("Checking if element exists using locator: " + loc);
-		return driver.findElements(loc).size() != 0 ? true : false;
+		return ngDriver.findElements(loc).size() != 0 ? true : false;
 	}
 
 	public void navigate_and_wait() {
 		LOG.info("Navigating to page " + url);
-		driver.get(url);
+		ngDriver.get(url);
 		wait.until(ExpectedConditions.urlToBe(url));
 		
 	}
@@ -102,16 +103,13 @@ public abstract class AbstractBasePageObject extends LoadableComponent<AbstractB
 		}
 	}
 	
-	public void wait_for_angular() {
-		this.ngDriver.waitForAngularRequestsToFinish();
-	}
 	
     /**
      * wait until condition is true or timeout is reached
      * @throws TimeoutException 
      */
     protected <V> V wait_until_true_or_timeout(ExpectedCondition<V> isTrue) throws TimeoutException {
-        Wait<WebDriver> wait = new WebDriverWait(this.driver, timeToWait)
+        Wait<WebDriver> wait = new WebDriverWait(this.ngDriver, timeToWait)
                 .ignoring(StaleElementReferenceException.class);
             return wait.until(isTrue);
     }

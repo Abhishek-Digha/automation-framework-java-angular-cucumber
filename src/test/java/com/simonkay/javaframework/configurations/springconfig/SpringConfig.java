@@ -1,7 +1,6 @@
 package com.simonkay.javaframework.configurations.springconfig;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 
-import com.paulhammant.ngwebdriver.NgWebDriver;
+import com.github.sergueik.jprotractor.NgWebDriver;
 import com.simonkay.javaframework.configurations.CucumberWorld;
 import com.simonkay.javaframework.configurations.FrameworkProperties;
 import com.simonkay.javaframework.configurations.webdriver.Driver;
@@ -68,8 +67,7 @@ public class SpringConfig {
 	@Bean
 	public AngularCalculatorPage angularLoginPage() {
 		 return new AngularCalculatorPage(
-				 	ngDriver(),
-	                driver(),               
+				 	ngDriver(),               
 	                properties().seleniumImplicitWaitTime(),
 	                properties().getTestServerBaseAddress()
 	        );
