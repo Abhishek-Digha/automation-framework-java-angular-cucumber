@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
 import com.simonkay.javaframework.utility.enums.Language;
+import com.simonkay.javaframework.utility.exceptions.InvalidLanguageSpecifiedException;
 
 public class LocaleHelper implements LanguageImplementor {
 	private static final Logger LOG = LogManager.getLogger(LocaleHelper.class);
@@ -17,8 +18,11 @@ public class LocaleHelper implements LanguageImplementor {
 	private ResourceBundle resource;
 	
 	public LocaleHelper(String lang) {
+		try {
 		language = getLanguage(lang);
-		LOG.debug("Retrieved application language as: " + this.language.toString());
+		} catch (InvalidLanguageSpecifiedException ilse) {
+			LOG.fatal("Invalid Language in settings, defaulting language would be naive, exiting" + ilse);
+		}
 	}
 	
 	@Override
@@ -27,28 +31,27 @@ public class LocaleHelper implements LanguageImplementor {
 	}
 
 	@Override
-	public Language getLanguage(String language) {
+	public Language getLanguage(String language) throws InvalidLanguageSpecifiedException {
 			
 		switch(language.toLowerCase()) {
 		case "english":
-			LOG.debug("Retrieving language and setting resources for: English");
+			LOG.debug("Test language set to: English");
 			resource = ResourceBundle.getBundle("localisation_resources.english", new Locale("en"));
 			return Language.ENGLISH;
 		case "italian":
-			LOG.debug("Retrieving language and setting resources for: Italian");
+			LOG.debug("Test language set to: Italian");
 			resource = ResourceBundle.getBundle("localisation_resources.italian", new Locale("it"));
 			return Language.ITALIAN;
 		case "spanish":
-			LOG.debug("Retrieving language and setting resources for: Spanish");
+			LOG.debug("Test language set to: Spanish");
 			resource = ResourceBundle.getBundle("localisation_resources.spanish", new Locale("es"));
 			return Language.SPANISH;
 		case "french":
-			LOG.debug("Retrieving language and setting resources for: French");
+			LOG.debug("Test language set to: French");
 			resource = ResourceBundle.getBundle("localisation_resources.french", new Locale("fr"));
 			return Language.FRENCH;
-		default: LOG.debug("Bad Language set in properties or by maven, defaulting to ENGLISH");
-			resource = ResourceBundle.getBundle("localisation_resources.english", new Locale("en"));
-			return Language.ENGLISH;		
+		default: throw new InvalidLanguageSpecifiedException("Unsupported or incorrect language selected, "
+				+ "system will exit, check framework configuration properties");	
 		}				
 	}
 	

@@ -19,7 +19,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class ReportEnvironmentHelper {
-	private static final Logger LOG = LogManager.getLogger(ReportEnvironmentHelper.class);
+	private static final Logger LOG = LogManager
+			.getLogger(ReportEnvironmentHelper.class);
 
 	private HashMap<String, String> envProps;
 	private DocumentBuilderFactory docFactory;
@@ -36,44 +37,56 @@ public class ReportEnvironmentHelper {
 	private DOMSource source;
 
 	public ReportEnvironmentHelper(HashMap<String, String> props) {
-		LOG.debug("Instantiating the environment builder" + props.toString());
+		logConfig(props);
 		envProps = props;
 		prepareData();
 		saveXml();
 	}
 
+	private void logConfig(HashMap<String, String> props) {
+		for (String name : props.keySet()) {
+			  if (!props.get(name).toString().isEmpty()) {
+				LOG.info("Framework configurations: " + name + " ["+ props.get(name).toString() + "]");
+			  } else { 
+				LOG.warn("Framework configurations: " + name + " [Not specified in the framework configuration]");
+			  }
+		}
+		
+	}
+
 	private void prepareData() {
 		try {
-		docFactory = DocumentBuilderFactory.newInstance();
-	    docBuilder = docFactory.newDocumentBuilder();
-	    
-	    doc = docBuilder.newDocument();
-	    rootElement = doc.createElement("qa:environment");
-	    rootElement.setAttribute("xmlns:qa", "urn:model.commons.qatools.yandex.ru");
-	    doc.appendChild(rootElement); 
-	    for (Entry<String, String> entry : envProps.entrySet()) {
-	    	if(entry.getValue().isEmpty()) {
-	    		entry.setValue("Not specified in the config");
-	    	}
-	    	
-		    	parameter = doc.createElement("parameter");
-		    	rootElement.appendChild(parameter);
-		    	
-			    name = doc.createElement("name");
-			    name.appendChild(doc.createTextNode(entry.getKey()));
-			    parameter.appendChild(name);	 
-			    
-			    key = doc.createElement("key");
-			    key.appendChild(doc.createTextNode(entry.getKey()));
-			    parameter.appendChild(key);	
-			    
-			    value = doc.createElement("value");
-			    value.appendChild(doc.createTextNode(entry.getValue()));
-			    parameter.appendChild(value);	
-	    	}
-	    }catch (ParserConfigurationException pce) {
-	    	LOG.fatal("Parse Exception", pce);
-	    }	       
+			docFactory = DocumentBuilderFactory.newInstance();
+			docBuilder = docFactory.newDocumentBuilder();
+
+			doc = docBuilder.newDocument();
+			rootElement = doc.createElement("qa:environment");
+			rootElement.setAttribute("xmlns:qa",
+					"urn:model.commons.qatools.yandex.ru");
+			doc.appendChild(rootElement);
+			for (Entry<String, String> entry : envProps.entrySet()) {
+				if (entry.getValue().isEmpty()) {
+					entry.setValue("Not specified in the config");
+				}
+
+				parameter = doc.createElement("parameter");
+				rootElement.appendChild(parameter);
+
+				name = doc.createElement("name");
+				name.appendChild(doc.createTextNode(entry.getKey()));
+				parameter.appendChild(name);
+
+				key = doc.createElement("key");
+				key.appendChild(doc.createTextNode(entry.getKey()));
+				parameter.appendChild(key);
+
+				value = doc.createElement("value");
+				value.appendChild(doc.createTextNode(entry.getValue()));
+				parameter.appendChild(value);
+			}
+		} catch (ParserConfigurationException pce) {
+			LOG.fatal("Parse Exception", pce);
+		}
 	}
 
 	private void saveXml() {

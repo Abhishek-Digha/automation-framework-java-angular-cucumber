@@ -21,7 +21,7 @@ import com.github.sergueik.jprotractor.NgWebDriver;
 import com.simonkay.javaframework.configurations.webdriver.WaitConditions;
 import com.simonkay.javaframework.utility.localisation.LocaleHelper;
 
-public abstract class AbstractBasePageObject extends LoadableComponent<AbstractBasePageObject> {
+public abstract class AbstractBasePageObject {
 	
 	@Autowired
 	protected LocaleHelper localeHelper;
@@ -49,37 +49,32 @@ public abstract class AbstractBasePageObject extends LoadableComponent<AbstractB
 	}
 
 	public boolean does_element_exist(By loc) {
-		LOG.info("Checking if element exists using locator: " + loc);
 		return ngDriver.findElements(loc).size() != 0 ? true : false;
 	}
 
 	public void navigate_and_wait() {
-		LOG.info("Navigating to page " + url);
 		ngDriver.get(url);
 		wait.until(ExpectedConditions.urlToBe(url));
 		
 	}
 
 	public void set_text(WebElement ele, String value) {
-		LOG.info("Setting text on element: " + ele + " with the value: " + value);
 		ele.clear();
 		ele.sendKeys(value);
 	}
 
 	public void submit(WebElement ele) {
-		LOG.info("Attempting to submit on element: " + ele);
 		ele.submit();
 	}
 
 	public void selectDropDownByValue(WebElement ele, String valueToChoose) {
-		LOG.info("Selecting dropdown value on: " + ele + " with the value " + valueToChoose);
 		Select s = new Select(ele);
 		wait_for_dropdown(ele);
 		s.selectByVisibleText(valueToChoose);
 	}
 
 	public boolean is_text_present(String text) {
-		LOG.info("Attempting to find text on the page: " + text);
+		LOG.debug("Attempting to find text on the page: " + text);
 		try {
 			wait_until_true_or_timeout(WaitConditions.pageContainsText(text));
 		} catch (TimeoutException te) {
@@ -90,7 +85,6 @@ public abstract class AbstractBasePageObject extends LoadableComponent<AbstractB
 	}
 
 	private void wait_for_dropdown(WebElement ele) {
-		LOG.info("Waiting for dropdown to be clickable: " + ele);
 		wait.until(ExpectedConditions.elementToBeClickable(ele));
 	}
 

@@ -18,56 +18,42 @@ public class FrameworkProperties {
     }
     
     public String getGridAddress() {
-    	String result = environment.getProperty("grid.endpoint");
-    	LOG.info("Test run grid endpoint baseUrl: " + result);
-    	return result;
+    	return environment.getProperty("grid.endpoint");  	
     }
     
     public String getGridOrLocal() {
-    	String result = environment.getProperty("run.on.browserstack.grid.local");
-    	LOG.info("Test run test architecture: " + result);
-    	return result;
+    	return environment.getProperty("run.on.browserstack.grid.local");
+
     }
     
     public String getBrowserType() {
-    	String result = environment.getProperty("browser");
-    	LOG.info("Test run selected browser: " + result);
-    	return result;
+    	return environment.getProperty("browser");
     }
     
     public String getPlatformType() {
-    	String result = environment.getProperty("platform");
-    	LOG.info("Test run selected platform: " + result);
-    	return result;
+    	return environment.getProperty("platform");
+
     }
     
     public int seleniumImplicitWaitTime() {
-    	int result = environment.getProperty("driver.implicit.wait", Integer.class);
-    	return result;
+    	return environment.getProperty("driver.implicit.wait", Integer.class);
+
     }
     
     public String getApplicationLanguage() {
-    	String result = environment.getProperty("application.language");
-    	LOG.info("Test run selected language: " + result);
-    	return result;
+    	return environment.getProperty("application.language");
     }
     
     public String getProductName() {
-    	String result = environment.getProperty("product.name");
-    	LOG.info("Test run product: " + result);
-    	return result;
+    	return environment.getProperty("product.name");
     }
     
     public String getDatabaseConn() {
-    	String result = environment.getProperty("database.connection");
-    	LOG.info("Database Instance: " + result);
-    	return result;
+    	return environment.getProperty("database.connection");
     }
     
     public String getAngular() {
-    	String result = environment.getProperty("is.frontend.angular");
-    	LOG.info("Frontend is angular? " + result);
-    	return result;
+    	return environment.getProperty("is.frontend.angular");
     }
 
 

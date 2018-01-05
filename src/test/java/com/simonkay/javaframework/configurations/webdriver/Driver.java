@@ -19,7 +19,7 @@ public class Driver extends EventFiringWebDriver {
 	private static final Thread SHUTDOWN_HOOK = new Thread() {	
 		@Override
 		public void run() {
-			LOG.debug("Executing multithreaded job for shutdown hook");
+			LOG.debug("Running browser shutdown hook");
 			killDriver();
 		}
 	};
@@ -42,15 +42,15 @@ public class Driver extends EventFiringWebDriver {
 	public static void killDriver() {		
 		WebDriver driver = CURRENT_DRIVER;
 		CURRENT_DRIVER = null;	
-		if (driver != null) {
-			LOG.info("Attempting to kill the driver instance");
+		if (driver != null) {			
 			driver.quit();
+			LOG.debug("Browser killed successfully");
 		}
 	}
 	
 	public Driver(String browserType) throws InvalidDriverTypeSelectedException {
 		super(getCurrentDriver(browserType));
-		LOG.info("Retrieved current browser for: " + browserType + ". Registering shutdown hook on the browser");
+		LOG.debug("Registering shutdown hook on browser: " + browserType);
 		Runtime.getRuntime().addShutdownHook(SHUTDOWN_HOOK);
 	}
 
@@ -62,12 +62,12 @@ public class Driver extends EventFiringWebDriver {
 					"src/test/resources/binaries/chromedriver.exe");
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--start-maximized");
-			LOG.info("Chrome successfully set, returning new chromedriver with options: " + chromeOptions);
+			LOG.debug("Chrome successfully set, returning new chromedriver with options: " + chromeOptions);
 			return new ChromeDriver(chromeOptions);
 		case "firefox":
 			System.setProperty("webdriver.firefox.driver",
 					"src/test/resources/binaries/geckodriver.exe");
-			LOG.info("Firefox successfully set, returning new geckodriver with options: " + null);
+			LOG.debug("Firefox successfully set, returning new geckodriver with options: " + null);
 			return new FirefoxDriver();
 		default:
 			throw new InvalidDriverTypeSelectedException(

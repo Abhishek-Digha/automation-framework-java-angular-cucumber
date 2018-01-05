@@ -2,6 +2,7 @@ package com.simonkay.javaframework.configurations.webdriver;
 
 
 import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,19 +30,21 @@ public class WebDriverHooks {
 	
 	@Before
 	public void log_scenario_started(Scenario scenario) {
-		LOG.debug("Beginning of scenario: " + scenario.getId());
+		LOG.debug("[START OF SCENARIO] " + scenario.getId());
 	}
 	
 	@Before
 	public void delete_browser_cookies(Scenario scenario) {
-		LOG.info("Deleting browser cookies after: " + scenario.getName());
+		LOG.debug("deleting browser cookies");
 		driver.manage().deleteAllCookies();
 	}
 	
 	
 	@After
 	public void add_failure_attachments_if_needed(Scenario scenario) {
+		LOG.debug("[END OF SCENARIO] " + scenario.getId());
 		if (scenario.isFailed()) {
+			LOG.fatal("[SCENARIO FAILED] Attaching page source and screenshot");
 			check_if_pagesource(scenario);
 			check_if_screenshot(scenario);
 		}
