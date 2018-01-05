@@ -27,7 +27,6 @@ public class Driver extends EventFiringWebDriver {
 
 	@Override
 	public void close() {
-		LOG.info("Attempting to close the driver");
 		if (Thread.currentThread() != SHUTDOWN_HOOK) {
 			throw new UnsupportedOperationException(
 					"Driver will close when the JVM exits, do not manually call .close() on it");
