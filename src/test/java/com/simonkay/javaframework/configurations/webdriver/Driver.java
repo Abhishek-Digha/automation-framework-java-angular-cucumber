@@ -24,7 +24,6 @@ public class Driver extends EventFiringWebDriver {
 		}
 	};
 	
-
 	@Override
 	public void close() {
 		if (Thread.currentThread() != SHUTDOWN_HOOK) {

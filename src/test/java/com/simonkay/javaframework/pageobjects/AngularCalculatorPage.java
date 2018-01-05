@@ -68,7 +68,9 @@ public class AngularCalculatorPage extends AbstractBasePageObject {
 	}
 
 	public int get_result() {		
-		return Integer.valueOf(result_box.getText());
+		int result = Integer.valueOf(result_box.getText());
+		LOG.info("Result was: " + result);
+		return result;
 	}
 
 }
