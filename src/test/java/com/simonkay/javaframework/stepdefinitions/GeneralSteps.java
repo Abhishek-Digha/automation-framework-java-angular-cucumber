@@ -22,13 +22,13 @@ public class GeneralSteps extends AbstractBaseStepDefinition {
 	@Given("^The order \"([^\"]*)\" exists$")
 	public void the_order_exists(String orderAlias) throws Throwable {
 		Order order = new Order("Credit card", new DataProviderInjector());
-		cucumberWorld.addNewOrder(orderAlias, order);    
+		getCucumberWorld().addNewOrder(orderAlias, order);    
 	}
 	
 	@Given("The user \"([^\"]*)\" exists$") 
 	public void the_user_exists(String userAlias) throws Throwable {
 		User user = new User();
-		cucumberWorld.addNewUser(userAlias, user);		
+		getCucumberWorld().addNewUser(userAlias, user);		
 	}
 	
 	@Then("^i force a fail$")

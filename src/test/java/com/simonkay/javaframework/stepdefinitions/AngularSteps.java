@@ -21,9 +21,6 @@ public class AngularSteps extends AbstractBaseStepDefinition {
 
 
 	@Autowired
-	private LocaleHelper localeHelper;
-	
-	@Autowired
 	private AngularCalculatorPage angularCalculatorPage;
 	
 	
