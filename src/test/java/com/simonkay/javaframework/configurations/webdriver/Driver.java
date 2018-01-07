@@ -47,14 +47,13 @@ public class Driver extends EventFiringWebDriver {
 		}
 	}
 	
-	public Driver(String browserType) throws InvalidDriverTypeSelectedException {
-		super(getCurrentDriver(browserType));
+	public Driver(String browserType, String gridOrLocal, String gridAddress) throws InvalidDriverTypeSelectedException {
+		super(getCurrentDriver(browserType, gridOrLocal, gridAddress));
 		LOG.debug("Registering shutdown hook on browser: " + browserType);
 		Runtime.getRuntime().addShutdownHook(SHUTDOWN_HOOK);
 	}
 
-	private static WebDriver getCurrentDriver(String browserType)
-			throws InvalidDriverTypeSelectedException {		
+	private static WebDriver getCurrentDriver(String browserType, String gridOrLocal, String gridAddress) throws InvalidDriverTypeSelectedException {		
 		switch (browserType.toLowerCase()) {
 		case "chrome":
 			System.setProperty("webdriver.chrome.driver",

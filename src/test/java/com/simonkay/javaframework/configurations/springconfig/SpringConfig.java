@@ -34,9 +34,8 @@ public class SpringConfig {
 	@Scope("singleton")
 	public Driver driver() {
 		Driver wd = null;
-		
 		try {
-		wd = new Driver(properties().getBrowserType());
+		wd = new Driver(properties().getBrowserType(), properties().getGridOrLocal(), properties().getGridAddress());
 		} catch(InvalidDriverTypeSelectedException ex) {
 			LOG.debug("Invalid driver specified" + ex);
 			System.exit(1);

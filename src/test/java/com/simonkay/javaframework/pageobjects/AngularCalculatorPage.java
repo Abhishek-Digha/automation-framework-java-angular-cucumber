@@ -49,35 +49,32 @@ public class AngularCalculatorPage extends AbstractBasePageObject<AngularCalcula
 		LOG.debug("Instantiating page objects for " + getClass().getName());
 	}
 
-	public void multipy(int num1, int num2) throws InterruptedException {
+	public void multipy(int num1, int num2) {
 		LOG.info("Attempting to multiply: " + num1 + " and: " + num2);
 		reset_form_data();
 		first_value_box.sendKeys(String.valueOf(num1));
 		second_value_box.sendKeys(String.valueOf(num2));
 		select_dropdown_by_value(operator_dropbox_box, "*");
-		Thread.sleep(25000);
 		go_button.click();
 		getDriver().waitForAngular();
 	}
 
-	public void add(int num1, int num2) throws InterruptedException {
+	public void add(int num1, int num2) {
 		LOG.info("Attempting to add: " + num1 + " and: " + num2);
 		reset_form_data();
 		set_text(first_value_box, String.valueOf(num1));
 		set_text(second_value_box, String.valueOf(num2));
 		select_dropdown_by_value(operator_dropbox_box, "+");
-		Thread.sleep(25000);
 		go_button.click();
 		getDriver().waitForAngular();
 	}
 
-	public void subtract(int num1, int num2) throws InterruptedException {
+	public void subtract(int num1, int num2) {
 		LOG.info("Attempting to subtract: " + num1 + " from: " + num2);
 		reset_form_data();
 		first_value_box.sendKeys(String.valueOf(num2));
 		second_value_box.sendKeys(String.valueOf(num1));
 		select_dropdown_by_value(operator_dropbox_box, "-");
-		Thread.sleep(25000);
 		go_button.click();
 		getDriver().waitForAngular();
 	}
