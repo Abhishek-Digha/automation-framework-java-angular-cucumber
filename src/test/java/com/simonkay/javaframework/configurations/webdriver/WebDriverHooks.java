@@ -17,7 +17,6 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
 public class WebDriverHooks {
-	private static boolean runOnce = true;
 	private static final Logger LOG = LogManager.getLogger(WebDriverHooks.class);
 	
 	@Autowired
