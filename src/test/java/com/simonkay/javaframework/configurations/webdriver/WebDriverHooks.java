@@ -27,6 +27,10 @@ public class WebDriverHooks {
 	private ReportEnvironmentHelper rh;
 
 
+	@Before("@tagged-hooks-example")
+	public void tagged_hooks_example() {
+		LOG.debug("[BEFORE] This hook only runs on features tagged with @tagged-hook-example");
+	}
 	
 	@Before
 	public void log_scenario_started(Scenario scenario) {
@@ -48,6 +52,11 @@ public class WebDriverHooks {
 			check_if_pagesource(scenario);
 			check_if_screenshot(scenario);
 		}
+	}
+	
+	@After("@tagged-hooks-example")
+	public void tagged_hooks_after_example() {
+		LOG.debug("[AFTER] This hook only runs after features tagged with @tagged-hook-example");
 	}
 	
 	

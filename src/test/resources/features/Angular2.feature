@@ -20,7 +20,7 @@ Feature: Angular Examples
     When I add 10 plus 25
     Then I should get 35    
     
-  @SeverityLevel.CRITICAL @TestCaseId("abc-007") @Issue("geo-999")
+  @SeverityLevel.CRITICAL @TestCaseId("abc-007") @Issue("geo-999") @tagged-hooks-example
   Scenario: User can do subtraction
   	subtraction description
     When I subtract 99 from 1000
