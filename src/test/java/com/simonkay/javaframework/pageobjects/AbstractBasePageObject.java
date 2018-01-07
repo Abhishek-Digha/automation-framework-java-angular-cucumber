@@ -38,7 +38,6 @@ public abstract class AbstractBasePageObject<T extends AbstractBasePageObject<T>
 		return this.url;
 	}
 
-
 	public AbstractBasePageObject(NgWebDriver ngdriver, int implicitWait, String url) {
 		ngDriver = ngdriver;
 		ngdriver.manage().window().maximize();
