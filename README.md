@@ -27,6 +27,7 @@ Powerful features of this framework are:
 - Logging capabilities per forked process using Log4j
 - Jenkins ready pipeline script(s) to aid in getting jenkins setup with plugins too
 - JProtractor .jar included in the project [it is not on maven central so requires being built from source]
+- Localisation support using my LocaleHandler
 
 Technology Stack:
 ---------
@@ -47,3 +48,24 @@ Technology Stack:
 - [Maven](https://maven.apache.org/) - Software project management tool (Build, dependencies, execution etc!)
 - [Geckodriver](https://github.com/mozilla/geckodriver/releases) - Firefox Driver
 - [Selenium Grid](http://www.seleniumhq.org/projects/grid/) - Distributed test execution, check out `zalenium` too, it's cool!
+
+Getting Started:
+---------
+
+1. Download and install maven -> `mvn` in command line should not return unknown command
+2. Download and install the java JDK
+3. Clone the project: `https://github.com/symonk/java-selenium-parallel-framework.git`
+4. Start running tests using the .bat files in the project directory
+5. Modify the code to meet your needs and happy testing!
+6. Please contribute/fork if you find it useful!
+
+Useful Information:
+---------
+
+- The framework settings reside in `src/test/resources/framework.properties` you can build and modify these, then check out the SpringConfiguration class
+- The Driver class extends `EventFiringWebDriver`
+- NGWebDriver is a must for angular, when you need to wait for angular just `getDriver().wait_for_angular` which is part of the AbstractBasePageObject class
+- Standard page object pattern applies, see my example as a reference
+- Shared step definition state exists by adding to the HashMap `CucumberWorld` class which is auto injected into the AbstractBaseStepDefinition class
+
+Happy testing, a word of warning tho.  be careful when updating selenium versions etc because you run the risk of JProtractor possibly not working, it is currently being moved onto maven central but is not quite there yet.
