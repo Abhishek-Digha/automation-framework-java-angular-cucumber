@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.simonkay.javaframework.utility.exceptions.InvalidDriverTypeSelectedException;
@@ -63,10 +64,11 @@ public class Driver extends EventFiringWebDriver {
 			LOG.debug("Chrome successfully set, returning new chromedriver with options: " + chromeOptions);
 			return new ChromeDriver(chromeOptions);
 		case "firefox":
+			FirefoxOptions ffOptions = new FirefoxOptions();			
 			System.setProperty("webdriver.firefox.driver",
 					"src/test/resources/binaries/geckodriver.exe");
-			LOG.debug("Firefox successfully set, returning new geckodriver with options: " + null);
-			return new FirefoxDriver();
+			LOG.debug("Firefox successfully set, returning new geckodriver with options: " + ffOptions);
+			return new FirefoxDriver(ffOptions);
 		default:
 			throw new InvalidDriverTypeSelectedException(
 					"Invalid driver specified, enter: 'chrome' or 'firefox' in the "
