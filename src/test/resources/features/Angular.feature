@@ -1,4 +1,4 @@
-@Angular
+@Angular @Regression
 Feature: Angular Examples
   As someone who does not want to learn javascript
   I want to be able to test angular with selenium
