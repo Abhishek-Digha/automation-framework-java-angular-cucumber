@@ -28,5 +28,5 @@ Feature: Angular Examples
     
   @TestCaseId("fail-001") @Issue("fail-002")
   Scenario: User can just fail
-  	subtraction description
+  	failure description
     Then i force a fail
