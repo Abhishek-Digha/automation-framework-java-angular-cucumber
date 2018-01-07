@@ -1,5 +1,3 @@
-#NOTE: Install the slack plugin on jenkins and configure the app on slack & hook/token in jenkins under configure "tools".
-
 node {
    def mvnHome
    try {
@@ -7,7 +5,7 @@ node {
      git 'https://github.com/symonk/Automation-Framework-Java-Angular-Cucumber.git'
    }
    stage('Execution') {
-     bat '"C:\\Program Files (x86)\\Jenkins/workspace\\GUI Automated Tests\\regression_chrome.bat"'
+     bat '"regression_chrome.bat"'
    }
    stage('REPORT') {
      allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
