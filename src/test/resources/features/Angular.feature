@@ -8,19 +8,19 @@ Feature: Angular Examples
     Angular calculator scenarios
     And I am on the calculator page
     
-  @TestCaseId("abc-007") @Issue("geo-999") @severity=blocker
+  @TestCaseId("abc-007") @Issue("geo-999") @severity=blocker @flaky
   Scenario: User can do multiplication
   	Multiplication description
     When I multiply 10 times 5
     Then I should get 50
     
-  @TestCaseId("abc-007") @Issue("geo-999") @severity=critical
+  @TestCaseId("abc-007") @Issue("geo-999") @severity=critical @muted
   Scenario: User can do addition
   	addition description
     When I add 10 plus 25
     Then I should get 35    
     
-  @TestCaseId("abc-007") @Issue("geo-999") @tagged-hooks-example @severity=minor
+  @TestCaseId("abc-007") @Issue("geo-999") @tagged-hooks-example @severity=minor @known
   Scenario: User can do subtraction
   	subtraction description
     When I subtract 99 from 1000
