@@ -2,16 +2,29 @@ package com.simonkay.javaframework.pageobjects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 import com.github.sergueik.jprotractor.NgWebDriver;
 import com.simonkay.javaframework.jpagefactory.How;
-import com.simonkay.javaframework.jpagefactory.JPageFactory;
 import com.simonkay.javaframework.jpagefactory.annotations.FindBy;
-import static org.assertj.core.api.Assertions.*;
 
-public class AngularCalculatorPage extends AbstractBasePageObject {
+public class AngularCalculatorPage extends AbstractBasePageObject<AngularCalculatorPage> {
 	private static final Logger LOG = LogManager.getLogger(AngularCalculatorPage.class);
+	
+	
+	@Override
+	protected void load() {		
+		LOG.warn(getClass().getSimpleName() + " was not loaded, attempting to load it now");
+		navigate_and_wait();
+	}
+
+	@Override
+	protected void isLoaded() throws Error {
+		 String url = getDriver().getCurrentUrl();
+		 Assert.assertTrue("Not on the calculator page: " + url, url.endsWith("calc/")); 
+		 LOG.warn(getClass().getSimpleName() + " was loaded successfully");
+	}
 
 	@FindBy(how = How.MODEL, using = "first")
 	private WebElement first_value_box;
@@ -27,44 +40,43 @@ public class AngularCalculatorPage extends AbstractBasePageObject {
 
 	@FindBy(how = How.ID, using = "gobutton")
 	private WebElement go_button;
+	
+	private final String relativeUrl = "calc/";
 
 	public AngularCalculatorPage(NgWebDriver ngdriver, int implicitWait, String url) {
 		super(ngdriver, implicitWait, url);
-		JPageFactory.initWebElements(ngdriver, this);
+		setRelativeUrl(relativeUrl);
 		LOG.debug("Instantiating page objects for " + getClass().getName());
 	}
 
 	public void multipy(int num1, int num2) {
 		LOG.info("Attempting to multiply: " + num1 + " and: " + num2);
-		first_value_box.clear();
-		second_value_box.clear();
+		reset_form_data();
 		first_value_box.sendKeys(String.valueOf(num1));
 		second_value_box.sendKeys(String.valueOf(num2));
-		selectDropDownByValue(operator_dropbox_box, "*");
+		select_dropdown_by_value(operator_dropbox_box, "*");
 		go_button.click();
-		ngDriver.waitForAngular();
+		getDriver().waitForAngular();
 	}
 
 	public void add(int num1, int num2) {
 		LOG.info("Attempting to add: " + num1 + " and: " + num2);
-		first_value_box.clear();
-		second_value_box.clear();
-		first_value_box.sendKeys(String.valueOf(num1));
-		second_value_box.sendKeys(String.valueOf(num2));
-		selectDropDownByValue(operator_dropbox_box, "+");
+		reset_form_data();
+		set_text(first_value_box, String.valueOf(num1));
+		set_text(second_value_box, String.valueOf(num2));
+		select_dropdown_by_value(operator_dropbox_box, "+");
 		go_button.click();
-		ngDriver.waitForAngular();
+		getDriver().waitForAngular();
 	}
 
 	public void subtract(int num1, int num2) {
 		LOG.info("Attempting to subtract: " + num1 + " from: " + num2);
-		first_value_box.clear();
-		second_value_box.clear();
+		reset_form_data();
 		first_value_box.sendKeys(String.valueOf(num2));
 		second_value_box.sendKeys(String.valueOf(num1));
-		selectDropDownByValue(operator_dropbox_box, "-");
+		select_dropdown_by_value(operator_dropbox_box, "-");
 		go_button.click();
-		ngDriver.waitForAngular();
+		getDriver().waitForAngular();
 	}
 
 	public int get_result() {		
@@ -72,5 +84,11 @@ public class AngularCalculatorPage extends AbstractBasePageObject {
 		LOG.info("Result was: " + result);
 		return result;
 	}
+	
+	private void reset_form_data() {
+		first_value_box.clear();
+		second_value_box.clear();
+	}
+
 
 }

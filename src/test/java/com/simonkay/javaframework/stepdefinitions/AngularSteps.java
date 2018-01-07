@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.simonkay.javaframework.pageobjects.AngularCalculatorPage;
@@ -33,7 +34,7 @@ public class AngularSteps extends AbstractBaseStepDefinition {
 	
 	@Given("^I am on the calculator page$")
 	public void i_am_on_the_calculator_page() throws Throwable {
-		angularCalculatorPage.navigate_and_wait();
+		angularCalculatorPage.get();		
 	}
 	
 	@When("^I multiply (\\d+) times (\\d+)$")

@@ -19,32 +19,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.sergueik.jprotractor.NgWebDriver;
 import com.simonkay.javaframework.configurations.webdriver.WaitConditions;
+import com.simonkay.javaframework.jpagefactory.JPageFactory;
 import com.simonkay.javaframework.utility.localisation.LocaleHelper;
 
-public abstract class AbstractBasePageObject {
+public abstract class AbstractBasePageObject<T extends AbstractBasePageObject<T>> extends LoadableComponent<T> {
 	
 	@Autowired
 	protected LocaleHelper localeHelper;
 	
 	private static final Logger LOG = LogManager.getLogger(AbstractBasePageObject.class);
-	protected final NgWebDriver ngDriver;
+	private final NgWebDriver ngDriver;
 	private final int timeToWait;
 	private final WebDriverWait wait;
 	private final String url;
+	private String relativeUrl;
 	
 	protected String getUrl() {
 		return this.url;
 	}
-	
+
 
 	public AbstractBasePageObject(NgWebDriver ngdriver, int implicitWait, String url) {
 		ngDriver = ngdriver;
 		timeToWait = implicitWait;
 		wait = new WebDriverWait(getDriver(), timeToWait);
 		this.url = url;
+		JPageFactory.initWebElements(ngdriver, this);
 	}
 
-	public WebDriver getDriver() {
+	protected NgWebDriver getDriver() {
 		return ngDriver;
 	}
 
@@ -53,9 +56,9 @@ public abstract class AbstractBasePageObject {
 	}
 
 	public void navigate_and_wait() {
-		ngDriver.get(url);
-		wait.until(ExpectedConditions.urlToBe(url));
-		
+		LOG.debug("Attempting to navigate to: " + url + relativeUrl);
+		ngDriver.get(url + relativeUrl);
+		wait.until(ExpectedConditions.urlToBe(url + relativeUrl));		
 	}
 
 	public void set_text(WebElement ele, String value) {
@@ -67,7 +70,7 @@ public abstract class AbstractBasePageObject {
 		ele.submit();
 	}
 
-	public void selectDropDownByValue(WebElement ele, String valueToChoose) {
+	public void select_dropdown_by_value(WebElement ele, String valueToChoose) {
 		Select s = new Select(ele);
 		wait_for_dropdown(ele);
 		s.selectByVisibleText(valueToChoose);
@@ -108,4 +111,8 @@ public abstract class AbstractBasePageObject {
             return wait.until(isTrue);
     }
 
+	
+    protected void setRelativeUrl(String relativeUrl) {
+		this.relativeUrl = relativeUrl;
+	}
 }
