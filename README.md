@@ -64,7 +64,7 @@ Useful Information:
 
 - The framework settings reside in `src/test/resources/framework.properties` you can build and modify these, then check out the SpringConfiguration class
 - The Driver class extends `EventFiringWebDriver`
-- NGWebDriver is a must for angular, when you need to wait for angular just `getDriver().wait_for_angular` which is part of the AbstractBasePageObject class
+- NGWebDriver is a must for angular, when you need to wait for angular just `getDriver().waitForAngular();` which is part of the AbstractBasePageObject class
 - Standard page object pattern applies, see my example as a reference
 - Shared step definition state exists by adding to the HashMap `CucumberWorld` class which is auto injected into the AbstractBaseStepDefinition class
 
