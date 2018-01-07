@@ -13,6 +13,8 @@ Before the documentation I would like to take a small section to talk about what
 If you would like to contribute to this project or have ideas to improve it, please contribute! grab a fork and fire me a pull request, it would be great for your input.  If using my work here, please contribute with atleast 1 PR.
 
 Powerful features of this framework are:
+---------
+
 - Parallel execution of the feature files at either a scenario or feature level
 - Shared state between cucumber step definitions using hashmap/dependency injection
 - Page Object design pattern, coupled with LoadableComponent
@@ -25,3 +27,23 @@ Powerful features of this framework are:
 - Logging capabilities per forked process using Log4j
 - Jenkins ready pipeline script(s) to aid in getting jenkins setup with plugins too
 - JProtractor .jar included in the project [it is not on maven central so requires being built from source]
+
+Technology Stack:
+---------
+
+- [Java](https://docs.oracle.com/javase/7/docs/api/) - Static language
+- [Selenium WebDriver](http://www.seleniumhq.org/projects/webdriver/) - Libary for interacting with webpage(s)
+- [Rest-Assured](http://rest-assured.io/) - A HTTP Client for API request/response testings with a simple DSL
+- [JProtractor](https://github.com/sergueik/jProtractor) - Protractor port to java
+- [JPageFactory](https://github.com/henrrich/jpagefactory) - Channel based locators with angular capabilities
+- [CucumberJVM](https://cucumber.io/docs/reference/jvm) - A BDD tool for writing acceptance tests in plain English.
+- [BrowserStack](https://www.browserstack.com/) - Platform as a service based cross browser/OS test execution.
+- [Teymers](https://github.com/temyers/cucumber-jvm-parallel-plugin) - A library used for generating test runners for our forked process execution
+- [Parallel_Tests](https://github.com/grosser/parallel_tests) - A gem for parallel threading of cucumber tests.
+- [JFaker](https://github.com/DiUS/java-faker) - A random data generation library ported to java from ruby.
+- [Allure](https://github.com/allure-framework/allure-cucumberjvm) - Awesome reporting functionality
+- [Spring](https://spring.io/) - Super useful dependency injection
+- [Jenkins](https://jenkins-ci.org/) - Used for build management etc
+- [Maven](https://maven.apache.org/) - Software project management tool (Build, dependencies, execution etc!)
+- [Geckodriver](https://github.com/mozilla/geckodriver/releases) - Firefox Driver
+- [Selenium Grid](http://www.seleniumhq.org/projects/grid/) - Distributed test execution, check out `zalenium` too, it's cool!
