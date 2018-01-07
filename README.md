@@ -54,7 +54,7 @@ Getting Started:
 
 1. Download and install maven -> `mvn` in command line should not return unknown command
 2. Download and install the java JDK
-3. Clone the project: `https://github.com/symonk/java-selenium-parallel-framework.git`
+3. Clone the project: `https://github.com/symonk/Auto-angular.git`
 4. Start running tests using the .bat files in the project directory
 5. Modify the code to meet your needs and happy testing!
 6. Please contribute/fork if you find it useful!
@@ -69,3 +69,8 @@ Useful Information:
 - Shared step definition state exists by adding to the HashMap `CucumberWorld` class which is auto injected into the AbstractBaseStepDefinition class
 
 Happy testing, a word of warning tho.  be careful when updating selenium versions etc because you run the risk of JProtractor possibly not working, it is currently being moved onto maven central but is not quite there yet.
+
+If you have any questions, I am happy to help! find me:
+
+- Jackofspaces@gmail.com
+- https://testersio.slack.com @simonkay
