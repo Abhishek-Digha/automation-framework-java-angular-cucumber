@@ -1,4 +1,4 @@
-Java UI CucumberJVM Framework by Simonkay
+Java Automation framework for Angular applications
 ==================================
 This Framework is provided by me to help you hit the ground running with java, selenium and cucumberJVM BDD based acceptance / end2end GUI tests.  The framework itself has many powerful features which are all outlined below.  I will continue working on this throughout 2018 and I also encourage you to fork it too!
 
