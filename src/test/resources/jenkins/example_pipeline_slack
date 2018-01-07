@@ -4,7 +4,7 @@ node {
    def mvnHome
    try {
    stage('FETCH SRC') {
-     git 'https://github.com/symonk/java-selenium-parallel-framework.git'
+     git 'https://github.com/symonk/Automation-Framework-Java-Angular-Cucumber.git'
    }
    stage('Execution') {
      bat '"C:\\Program Files (x86)\\Jenkins/workspace\\GUI Automated Tests\\regression_chrome.bat"'
