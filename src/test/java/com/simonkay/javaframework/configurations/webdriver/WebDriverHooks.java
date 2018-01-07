@@ -26,10 +26,10 @@ public class WebDriverHooks {
 	@Autowired
 	private ReportEnvironmentHelper rh;
 
-
+	//runs only on tagged hooks of this tag (warn level just to demo in report easy)
 	@Before("@tagged-hooks-example")
 	public void tagged_hooks_example() {
-		LOG.debug("[BEFORE] This hook only runs on features tagged with @tagged-hook-example");
+		LOG.warn("[BEFORE] This hook only runs on features tagged with @tagged-hook-example");
 	}
 	
 	@Before
@@ -54,9 +54,10 @@ public class WebDriverHooks {
 		}
 	}
 	
+	//runs only on tagged hooks of this tag (warn just to show in report easy)
 	@After("@tagged-hooks-example")
 	public void tagged_hooks_after_example() {
-		LOG.debug("[AFTER] This hook only runs after features tagged with @tagged-hook-example");
+		LOG.warn("[AFTER] This hook only runs after features tagged with @tagged-hook-example");
 	}
 	
 	
