@@ -19,15 +19,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class ReportEnvironmentHelper {
-	private static final Logger LOG = LogManager
-			.getLogger(ReportEnvironmentHelper.class);
+	private static final Logger LOG = LogManager.getLogger(ReportEnvironmentHelper.class);
 
 	private HashMap<String, String> envProps;
 	private DocumentBuilderFactory docFactory;
 	private DocumentBuilder docBuilder;
 	private Document doc;
 	private Element rootElement;
-	private final String xmlPath = "src/test/resources/allure_settings/environment.xml";
+	private static final String xmlPath = "src/test/resources/allure_settings/environment.xml";
 	private Element parameter;
 	private Element name;
 	private Element key;

@@ -8,4 +8,7 @@ public class InvalidLanguageSpecifiedException extends Exception {
 		super(message);
 	}
 
+	public InvalidLanguageSpecifiedException() {
+		super();
+	}
 }

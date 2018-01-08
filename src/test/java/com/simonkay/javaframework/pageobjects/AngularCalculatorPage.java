@@ -41,7 +41,7 @@ public class AngularCalculatorPage extends AbstractBasePageObject<AngularCalcula
 	@FindBy(how = How.ID, using = "gobutton")
 	private WebElement go_button;
 	
-	private final String relativeUrl = "calc/";
+	private static final String relativeUrl = "calc/";
 
 	public AngularCalculatorPage(NgWebDriver ngdriver, int implicitWait, String url) {
 		super(ngdriver, implicitWait, url);
@@ -80,7 +80,7 @@ public class AngularCalculatorPage extends AbstractBasePageObject<AngularCalcula
 	}
 
 	public int get_result() {		
-		int result = Integer.valueOf(result_box.getText());
+		int result = Integer.parseInt(result_box.getText());
 		LOG.info("Result was: " + result);
 		return result;
 	}

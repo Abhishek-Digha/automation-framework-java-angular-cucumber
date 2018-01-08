@@ -10,5 +10,9 @@ public class FrameworkPropertiesException extends Exception {
 	public FrameworkPropertiesException(String message) {
 		super(message);
 	}
+	
+	public FrameworkPropertiesException() {
+		super();
+	}
 
 }
