@@ -49,7 +49,7 @@ public class AngularCalculatorPage extends AbstractBasePageObject<AngularCalcula
 		LOG.debug("Instantiating page objects for " + getClass().getName());
 	}
 
-	public void multipy(int num1, int num2) {
+	public AngularCalculatorPage multipy(int num1, int num2) {
 		LOG.info("Attempting to multiply: " + num1 + " and: " + num2);
 		reset_form_data();
 		first_value_box.sendKeys(String.valueOf(num1));
@@ -57,9 +57,10 @@ public class AngularCalculatorPage extends AbstractBasePageObject<AngularCalcula
 		select_dropdown_by_value(operator_dropbox_box, "*");
 		go_button.click();
 		getDriver().waitForAngular();
+		return this;
 	}
 
-	public void add(int num1, int num2) {
+	public AngularCalculatorPage add(int num1, int num2) {
 		LOG.info("Attempting to add: " + num1 + " and: " + num2);
 		reset_form_data();
 		set_text(first_value_box, String.valueOf(num1));
@@ -67,9 +68,10 @@ public class AngularCalculatorPage extends AbstractBasePageObject<AngularCalcula
 		select_dropdown_by_value(operator_dropbox_box, "+");
 		go_button.click();
 		getDriver().waitForAngular();
+		return this;
 	}
 
-	public void subtract(int num1, int num2) {
+	public AngularCalculatorPage subtract(int num1, int num2) {
 		LOG.info("Attempting to subtract: " + num1 + " from: " + num2);
 		reset_form_data();
 		first_value_box.sendKeys(String.valueOf(num2));
@@ -77,6 +79,7 @@ public class AngularCalculatorPage extends AbstractBasePageObject<AngularCalcula
 		select_dropdown_by_value(operator_dropbox_box, "-");
 		go_button.click();
 		getDriver().waitForAngular();
+		return this;
 	}
 
 	public int get_result() {		
