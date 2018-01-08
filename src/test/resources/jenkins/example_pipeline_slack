@@ -4,8 +4,10 @@ node {
    stage('FETCH SRC') {
      git 'https://github.com/symonk/Automation-Framework-Java-Angular-Cucumber.git'
    }
+   catchError {
    stage('Execution') {
      bat '"regression_chrome.bat"'
+   }
    }
    stage('REPORT') {
      allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
@@ -34,7 +36,7 @@ node {
  
 
   // Override default values based on build status
-if (buildStatus == 'SUCCESSFUL') {
+if (buildStatus == 'SUCCESS') {
     color = 'GREEN'
     colorCode = '#00FF00'
   } else {
