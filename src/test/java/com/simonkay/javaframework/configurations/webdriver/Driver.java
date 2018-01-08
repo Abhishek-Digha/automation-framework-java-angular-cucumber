@@ -93,15 +93,14 @@ public class Driver extends EventFiringWebDriver {
 	}
 	
 	private static WebDriver getCurrentDriver(FrameworkProperties props) throws InvalidDriverTypeSelectedException {
-
 		
-		switch (props.getGridOrLocal().toLowerCase()) {
-		case "chrome":
+		if (props.getGridOrLocal().toLowerCase().equals("grid")) {
 			try {
 				return new RemoteWebDriver(new URL(props.getGridAddress()), prepCapabilities(props));
 			} catch (MalformedURLException | FrameworkPropertiesException ex) {
-				LOG.fatal("Invalid browsertype or platform", ex);
-			}		
+				LOG.fatal("Invalid browsertype or platform, Exiting the test run", ex);
+				System.exit(0);
+			}				
 		}
 			
 			switch (props.getBrowserType().toLowerCase()) {
