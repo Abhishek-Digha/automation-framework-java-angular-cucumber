@@ -45,8 +45,8 @@ public class ReportEnvironmentHelper {
 
 	private void logConfig(HashMap<String, String> props) {
 		for (String name : props.keySet()) {
-			  if (!props.get(name).toString().isEmpty()) {
-				LOG.info("Framework configurations: " + name + " ["+ props.get(name).toString() + "]");
+			  if (!props.get(name).isEmpty()) {
+				LOG.info("Framework configurations: " + name + " ["+ props.get(name) + "]");
 			  } else { 
 				LOG.warn("Framework configurations: " + name + " [Not specified in the framework configuration]");
 			  }

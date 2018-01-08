@@ -62,7 +62,7 @@ public class WebDriverHooks {
 	
 	@Attachment(value = "failed_pagesource", type = "text/plain")
 	public String  check_if_pagesource(Scenario scenario) {
-		return driver.getPageSource().toString();
+		return driver.getPageSource();
 	}
 	
 	@Attachment(value = "failed_screenshot", type = "image/png")
