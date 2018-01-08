@@ -96,7 +96,7 @@ public class Driver extends EventFiringWebDriver {
 		
 		if (props.getGridOrLocal().toLowerCase().equals("grid")) {
 			try {
-				return new RemoteWebDriver(new URL(props.getGridAddress()), prepCapabilities(props));
+				return new RemoteWebDriver(new URL(props.getGridAddress().toString()), prepCapabilities(props));
 			} catch (MalformedURLException | FrameworkPropertiesException ex) {
 				LOG.fatal("Invalid browsertype or platform, Exiting the test run", ex);
 				System.exit(0);

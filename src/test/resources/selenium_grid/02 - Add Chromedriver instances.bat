@@ -1,1 +1,1 @@
-java -Dwebdriver.chrome.driver="src/test/resources/binaries/chromedriver.exe" -jar selenium-server-standalone-3.8.1.jar -role node -hub http://localhost:4444/grid/register -port 12225 -browser "maxInstances=5,platform=ANY"
+java -Dwebdriver.chrome.driver="src/test/resources/selenium_grid/chromedriver.exe" -jar selenium-server-standalone-3.8.1.jar -role node -hub http://localhost:4444/grid/register -port 12225 -browser "browserName=chrome,maxInstances=10, platform=WINDOWS"
