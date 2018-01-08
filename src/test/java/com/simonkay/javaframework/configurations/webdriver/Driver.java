@@ -5,6 +5,7 @@ import java.net.URL;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -58,6 +59,10 @@ public class Driver extends EventFiringWebDriver {
 		Runtime.getRuntime().addShutdownHook(SHUTDOWN_HOOK);
 	}
 
+	private DesiredCapabilities prepCapabilities(FrameworkProperties props) {
+		return null;
+	}
+	
 	private static WebDriver getCurrentDriver(FrameworkProperties props) throws InvalidDriverTypeSelectedException {
 
 		
@@ -66,7 +71,7 @@ public class Driver extends EventFiringWebDriver {
 		case "chrome":
 			DesiredCapabilities caps = DesiredCapabilities.chrome();
 			caps.setBrowserName("");
-			caps.setPlatform(null);
+			caps.setPlatform(Platform.WINDOWS);
 			try {
 				return new RemoteWebDriver(new URL(props.getGridAddress()), caps);
 			} catch (MalformedURLException e) {
