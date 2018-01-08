@@ -1,4 +1,5 @@
 Java Automation framework for Angular applications
+[![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg?style=for-the-badge)]()
 ==================================
 This framework is provided by me to aid you in getting up and running as quickly as possible when testing angular applications.  Everyone by is familiar with protractor however it forces you to rewrite (if you have existing work in java) or learn javascript in order to implement a solution.  This framework provides the option of angular based locators and the ability to wait_for_angular(); to finish loading.  Big credits go to @henrrich and @sergueik for their work on JPageFactory and JProtractor.
 
