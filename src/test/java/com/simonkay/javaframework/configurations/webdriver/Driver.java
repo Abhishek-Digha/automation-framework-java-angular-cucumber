@@ -16,6 +16,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.simonkay.javaframework.configurations.FrameworkProperties;
+import com.simonkay.javaframework.utility.exceptions.FrameworkPropertiesException;
 import com.simonkay.javaframework.utility.exceptions.InvalidDriverTypeSelectedException;
 
 public class Driver extends EventFiringWebDriver {
@@ -59,28 +60,50 @@ public class Driver extends EventFiringWebDriver {
 		Runtime.getRuntime().addShutdownHook(SHUTDOWN_HOOK);
 	}
 
-	private DesiredCapabilities prepCapabilities(FrameworkProperties props) {
-		return null;
+	private static DesiredCapabilities prepCapabilities(FrameworkProperties props) throws FrameworkPropertiesException {
+		Platform platform = null;
+		
+		if (props.getPlatformType().toLowerCase().equals("linux")) {
+			platform = Platform.LINUX;
+		} else {
+			platform = Platform.WINDOWS;
+		} 
+		
+		DesiredCapabilities caps = null;
+		switch (props.getBrowserType().toLowerCase()) {
+		case "chrome":
+			 ChromeOptions chromeOptions = new ChromeOptions();
+			 chromeOptions.addArguments("--start-maximized");
+			 caps = DesiredCapabilities.chrome();
+			 caps.setBrowserName("chrome");
+			 caps.setPlatform(platform);
+			 caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+			 return caps;
+		
+		case "firefox":
+			 caps = DesiredCapabilities.firefox();
+			 caps.setBrowserName("firefox");
+			 caps.setPlatform(platform);
+			 return caps;
+		
+		default: 
+			throw new FrameworkPropertiesException("Invalid properties for browser / platform set");
+		}
+		
 	}
 	
 	private static WebDriver getCurrentDriver(FrameworkProperties props) throws InvalidDriverTypeSelectedException {
 
 		
-		
 		switch (props.getGridOrLocal().toLowerCase()) {
 		case "chrome":
-			DesiredCapabilities caps = DesiredCapabilities.chrome();
-			caps.setBrowserName("");
-			caps.setPlatform(Platform.WINDOWS);
 			try {
-				return new RemoteWebDriver(new URL(props.getGridAddress()), caps);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
-			
+				return new RemoteWebDriver(new URL(props.getGridAddress()), prepCapabilities(props));
+			} catch (MalformedURLException | FrameworkPropertiesException ex) {
+				LOG.fatal("Invalid browsertype or platform", ex);
+			}		
 		}
 			
-
 			switch (props.getBrowserType().toLowerCase()) {
 			case "chrome":
 				System.setProperty("webdriver.chrome.driver",

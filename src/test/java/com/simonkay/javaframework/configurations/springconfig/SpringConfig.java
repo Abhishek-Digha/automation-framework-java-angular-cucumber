@@ -35,7 +35,7 @@ public class SpringConfig {
 	public Driver driver() {
 		Driver wd = null;
 		try {
-		wd = new Driver(properties().getBrowserType(), properties().getGridOrLocal(), properties().getGridAddress());
+		wd = new Driver(properties());
 		} catch(InvalidDriverTypeSelectedException ex) {
 			LOG.debug("Invalid driver specified" + ex);
 			System.exit(1);
@@ -78,6 +78,7 @@ public class SpringConfig {
 		HashMap<String, String> props = new HashMap<String, String>();
 		props.put("Language:", properties().getApplicationLanguage());
 		props.put("Browser:", properties().getBrowserType());
+		props.put("Platform:", properties().getPlatformType());
 		props.put("Environment:", properties().getTestServerBaseAddress());
 		props.put("Architecture:", properties().getGridOrLocal());
 		props.put("Grid Address:", properties().getGridAddress());
