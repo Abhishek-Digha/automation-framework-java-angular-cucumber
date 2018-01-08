@@ -40,7 +40,6 @@ Technology Stack:
 - [CucumberJVM](https://cucumber.io/docs/reference/jvm) - A BDD tool for writing acceptance tests in plain English.
 - [BrowserStack](https://www.browserstack.com/) - Platform as a service based cross browser/OS test execution.
 - [Teymers](https://github.com/temyers/cucumber-jvm-parallel-plugin) - A library used for generating test runners for our forked process execution
-- [Parallel_Tests](https://github.com/grosser/parallel_tests) - A gem for parallel threading of cucumber tests.
 - [JFaker](https://github.com/DiUS/java-faker) - A random data generation library ported to java from ruby.
 - [Allure](https://github.com/allure-framework/allure-cucumberjvm) - Awesome reporting functionality
 - [Spring](https://spring.io/) - Super useful dependency injection
