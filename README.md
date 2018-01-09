@@ -57,6 +57,7 @@ Getting Started:
 4. Start running tests using the .bat files in the project directory
 5. Modify the code to meet your needs and happy testing!
 6. Please contribute/fork if you find it useful!
+7. Mess around with jenkins :x
 
 Useful Information:
 ---------
