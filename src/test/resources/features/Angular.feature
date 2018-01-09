@@ -26,7 +26,3 @@ Feature: Angular Examples
     When I subtract 99 from 1000
     Then I should get 901
     
-  @TestCaseId("fail-001") @Issue("fail-002")
-  Scenario: User can just fail
-  	failure description
-    Then i force a fail
