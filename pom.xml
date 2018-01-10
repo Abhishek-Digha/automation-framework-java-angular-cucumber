@@ -27,6 +27,7 @@
 		<selenium.version>3.8.1</selenium.version>
 		<slf4j-api.version>1.8.0-alpha2</slf4j-api.version>
 		<slf4j-log4j12.version>1.8.0-alpha2</slf4j-log4j12.version>
+		<aspectj.version>1.8.4</aspectj.version>
 		<runtags></runtags>
 	</properties>
 

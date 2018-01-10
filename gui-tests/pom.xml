@@ -14,7 +14,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<cucumberparallel.version>4.2.0</cucumberparallel.version>
 		<parallelfork.count>10</parallelfork.count>
-		<aspectj.version>1.8.4</aspectj.version>
 		<angular.driver>1.0</angular.driver>
 		<jprotractor.version>1.3</jprotractor.version>
 	    <maven.compiler.source>1.8</maven.compiler.source>
