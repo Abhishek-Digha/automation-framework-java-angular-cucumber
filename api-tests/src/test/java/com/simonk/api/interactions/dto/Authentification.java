@@ -32,7 +32,7 @@ public class Authentification {
     		return this;
     	}
     	
-    	public Builder withpass(String pass) {
+    	public Builder withPass(String pass) {
     		this.pass = pass;
     		return this;
     	}
@@ -42,6 +42,13 @@ public class Authentification {
     	}
     	
     }
+
+	@Override
+	public String toString() {
+		return "Authentification [user=" + user + ", pass=" + pass + "]";
+	}
+    
+    
     
 
 }

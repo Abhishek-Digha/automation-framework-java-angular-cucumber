@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.simonk.api.config.ServiceProperties;
 import com.simonk.api.interactions.dto.Test2;
+import com.simonk.api.interactions.services.AuthentificationService;
 import com.simonk.api.interactions.services.RestfulBookerService;
 
 @Configuration
@@ -27,8 +28,9 @@ public class SpringConfig {
 	}
 	
 	@Bean
-	public Test2 i() {
-		return new Test2();
+	public AuthentificationService authService() {
+		return new AuthentificationService(properties().getBaseEndpoint());
 	}
+	
 	
 }

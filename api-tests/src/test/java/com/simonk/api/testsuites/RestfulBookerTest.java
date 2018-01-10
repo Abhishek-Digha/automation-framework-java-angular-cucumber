@@ -19,8 +19,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.assertj.core.api.Assertions.*;
 
 import com.simonk.api.config.spring.SpringConfig;
+import com.simonk.api.interactions.dto.Authentification;
+import com.simonk.api.interactions.dto.AuthentificationResponse;
 import com.simonk.api.interactions.dto.Booking;
 import com.simonk.api.interactions.dto.BookingDates;
+import com.simonk.api.interactions.dto.BookingResponse;
+import com.simonk.api.interactions.services.AuthentificationService;
 import com.simonk.api.interactions.services.RestfulBookerService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,6 +33,8 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 
 	@Autowired
 	public RestfulBookerService restfulBookerService;
+	@Autowired
+	public AuthentificationService authService;
 
 	@Test
 	@DisplayName("Testing retrieving a valid booking")
@@ -42,7 +48,7 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 	}
 
 	@Test
-	@DisplayName("Get a booking returns a 200 ok")
+	@DisplayName("Testing getting all bookings")
 	@Issue("001")
 	@TmsLink("001")
 	@Severity(SeverityLevel.CRITICAL)
@@ -80,8 +86,8 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 
 	@Test
 	@DisplayName("Testing adding a new booking")
-	@Issue("004")
-	@TmsLink("004")
+	@Issue("005")
+	@TmsLink("005")
 	@Severity(SeverityLevel.MINOR)
 	public void postBookingReturns200() {
 		BookingDates dates = new BookingDates.Builder().setCheckin(new Date()).setCheckout(new Date()).build();
@@ -95,4 +101,32 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 		Response response = restfulBookerService.postBooking(booking);
 		assertThat(response.getStatusCode()).as("Posting booking returns 200").isEqualTo(200);
 	}
+	
+	@Test
+	@DisplayName("Testing adding a new booking")
+	@Issue("006")
+	@TmsLink("006")
+	@Severity(SeverityLevel.MINOR)
+	public void deleteBookingReturns200() {
+		BookingDates dates = new BookingDates.Builder().setCheckin(new Date()).setCheckout(new Date()).build();
+		Booking booking = new Booking.Builder().setFirstname("Delete").setLastname("Me")
+				.setTotalprice(200)
+                .setDepositpaid(true)
+                .setBookingdates(dates)
+                .setAdditionalneeds("None")
+                .build();
+
+		BookingResponse createdBook = restfulBookerService.postBooking(booking).as(BookingResponse.class);
+		
+		Authentification auth = new Authentification.Builder()
+        .withUser("admin")
+        .withPass("password123")
+        .build();
+		AuthentificationResponse createdAuth = authService.postAuth(auth).as(AuthentificationResponse.class);
+		
+		Response r2 = restfulBookerService.deleteBooking(createdBook.getBookingid(), createdAuth.getToken());
+		assertThat(r2.getStatusCode()).as("Deleting valid booking returns 200").isEqualTo(200);
+	}
+	
+	
 }

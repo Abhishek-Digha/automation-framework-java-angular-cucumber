@@ -5,7 +5,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
-public class AbstractBaseService {
+public abstract class AbstractBaseService {
 
 	private final String baseUrl;	
 	private final RequestSpecification spec;

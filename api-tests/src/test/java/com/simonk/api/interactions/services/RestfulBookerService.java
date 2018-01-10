@@ -3,11 +3,8 @@ package com.simonk.api.interactions.services;
 import com.simonk.api.interactions.dto.Booking;
 
 import io.qameta.allure.Step;
-import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 
 public class RestfulBookerService extends AbstractBaseService {
