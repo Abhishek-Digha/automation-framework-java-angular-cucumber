@@ -12,36 +12,39 @@ import static io.restassured.RestAssured.given;
 
 public class RestfulBookerService extends AbstractBaseService {
 
-	private final String apiEndpoint = getBaseUrl() + "/booking/";
-	private final RequestSpecification spec = new RequestSpecBuilder()
-			.setContentType(ContentType.JSON).setBaseUri(getBaseUrl())
-			.addFilter(new AllureRestAssured()).build();
+	private final String apiEndpoint = getBaseUrl() + "booking/";
+	
 
 	public RestfulBookerService(String base) {
 		super(base);
 	}
 
 	@Step("Pinging service: Booking API")
-	public boolean pingService() {
-		return given().when().get(getBaseUrl() + "ping").getStatusCode() == 201;
+	public Response pingService() {
+		return given().when().get(getBaseUrl() + "ping");
+	}
+	
+	@Step("Retrieve a list of all bookings")
+	public Response getBookings() {
+		return given().spec(getSpec()).get(apiEndpoint);
 	}
 
-	@Step("Getting booking {id} with Accept type: {mediaType}.")
-	public Response getBooking(int id, String mediaType) {
-		return given().spec(spec).header("Accept", mediaType).get(
+	@Step("Getting booking {id}")
+	public Response getBooking(int id) {
+		return given().spec(getSpec()).get(
 				apiEndpoint + Integer.toString(id));
 
 	}
 
 	@Step("Saving a new bookings")
 	public Response postBooking(Booking payload) {
-		return given().spec(spec).contentType(ContentType.JSON).body(payload).when()
+		return given().spec(getSpec()).contentType(ContentType.JSON).body(payload).when()
 				.post(apiEndpoint);
 	}
 
 	@Step("Deleting a booking: {id}")
 	public Response deleteBooking(int id, String tokenValue) {
-		return given().spec(spec).header("Cookie", "token=" + tokenValue).delete(
+		return given().spec(getSpec()).header("Cookie", "token=" + tokenValue).delete(
 				apiEndpoint + Integer.toString(id));
 	}
 
