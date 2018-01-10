@@ -12,12 +12,11 @@ import com.simonk.gui.utility.exceptions.InvalidLanguageSpecifiedException;
 public class LocaleHelper implements LanguageImplementor {
 	private static final Logger LOG = LogManager.getLogger(LocaleHelper.class);
 	
-	private Language language;
 	private ResourceBundle resource;
 	
 	public LocaleHelper(String lang) {
 		try {
-		language = getLanguage(lang);
+		getLanguage(lang);
 		} catch (InvalidLanguageSpecifiedException ilse) {
 			LOG.fatal("Invalid Language in settings, defaulting language would be naive, exiting" + ilse);
 		}
