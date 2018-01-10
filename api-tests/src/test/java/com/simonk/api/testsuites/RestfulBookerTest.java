@@ -56,7 +56,7 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 	@DisplayName("Testing pinging the service")
 	@Issue("003")
 	@TmsLink("003")
-	@Severity(SeverityLevel.CRITICAL)
+	@Severity(SeverityLevel.NORMAL)
 	public void pingBookingsShouldReturn201() {
 		Response response = restfulBookerService.pingService();
 		SoftAssertions softly = new SoftAssertions();
@@ -71,7 +71,7 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 	@DisplayName("Testing retrieving non existing booking")
 	@Issue("004")
 	@TmsLink("004")
-	@Severity(SeverityLevel.CRITICAL)
+	@Severity(SeverityLevel.TRIVIAL)
 	public void getBookingWithNonExistingIdShouldReturn404() {
 		Response response = restfulBookerService.getBooking(252525);
 		assertThat(response.getStatusCode()).as(
@@ -82,7 +82,7 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 	@DisplayName("Testing adding a new booking")
 	@Issue("004")
 	@TmsLink("004")
-	@Severity(SeverityLevel.CRITICAL)
+	@Severity(SeverityLevel.MINOR)
 	public void postBookingReturns200() {
 		BookingDates dates = new BookingDates.Builder().setCheckin(new Date()).setCheckout(new Date()).build();
 		Booking booking = new Booking.Builder().setFirstname("Simon").setLastname("K")
