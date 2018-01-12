@@ -33,7 +33,7 @@ public class RestfulBookerService extends AbstractBaseService {
 
 	}
 
-	@Step("Saving a new bookings")
+	@Step("Saving a new booking")
 	public Response postBooking(Booking payload) {
 		return given().spec(getSpec()).body(payload).when()
 				.post(apiEndpoint);
