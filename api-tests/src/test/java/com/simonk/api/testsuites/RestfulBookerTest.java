@@ -12,6 +12,7 @@ import io.restassured.response.Response;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,15 +27,23 @@ import com.simonk.api.interactions.dto.BookingDates;
 import com.simonk.api.interactions.dto.BookingResponse;
 import com.simonk.api.interactions.services.AuthentificationService;
 import com.simonk.api.interactions.services.RestfulBookerService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { SpringConfig.class })
 public class RestfulBookerTest extends AbstractServiceTestSuite {
+	private static final Logger LOG = LogManager.getLogger(RestfulBookerTest.class);
 
 	@Autowired
 	public RestfulBookerService restfulBookerService;
 	@Autowired
 	public AuthentificationService authService;
+
+	@BeforeClass
+    public static void before_log() {
+	    LOG.info("Starting test run => RestfulBooker API Tests");
+    }
 
 	@Test
 	@DisplayName("Testing retrieving a valid booking")
@@ -43,8 +52,7 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 	@Severity(SeverityLevel.CRITICAL)
 	public void getBookingIdShouldReturn200() {
 		Response response = restfulBookerService.getBooking(1);
-		assertThat(response.getStatusCode()).as("Checking status code is 200")
-				.isEqualTo(200);
+		assertThat(response.getStatusCode()).isEqualTo(200);
 	}
 
 	@Test
