@@ -69,7 +69,6 @@
 							<outputDirectory>${project.build.directory}/generated-test-sources/cucumber</outputDirectory>
 							<featuresDirectory>src/test/resources/features</featuresDirectory>
 							<monochrome>true</monochrome>
-							<filterFeaturesByTags>false</filterFeaturesByTags>
 							<tags>
 								<tag>${runtags}</tag>
 							</tags>
