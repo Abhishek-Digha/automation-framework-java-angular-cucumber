@@ -5,48 +5,42 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Authentification {
 	
 	@JsonProperty
-	private String user;
+	private String username;
 	@JsonProperty
-	private String pass;
-	
+	private String password;
 
-    public String getuser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public String getpass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
     
-    private Authentification(String user, String pass) {
-        this.user = user;
-        this.pass = pass;
+    private Authentification(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
     
     public static class Builder {
-    	private String user;
-    	private String pass;
+    	private String username;
+    	private String password;
     	
-    	public Builder withUser(String user) {
-    		this.user = user;
+    	public Builder withUser(String username) {
+    		this.username = username;
     		return this;
     	}
     	
-    	public Builder withPass(String pass) {
-    		this.pass = pass;
+    	public Builder withPass(String password) {
+    		this.password = password;
     		return this;
     	}
     	
     	public Authentification build() {
-    		return new Authentification(user, pass);
+    		return new Authentification(username, password);
     	}
     	
     }
-
-	@Override
-	public String toString() {
-		return "Authentification [user=" + user + ", pass=" + pass + "]";
-	}
     
     
     

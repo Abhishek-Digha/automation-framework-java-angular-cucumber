@@ -36,9 +36,9 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 	private static final Logger LOG = LogManager.getLogger(RestfulBookerTest.class);
 
 	@Autowired
-	public RestfulBookerService restfulBookerService;
+	private RestfulBookerService restfulBookerService;
 	@Autowired
-	public AuthentificationService authService;
+    private AuthentificationService authService;
 
 	@BeforeClass
     public static void before_log() {
@@ -54,6 +54,7 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 		Response response = restfulBookerService.getBooking(1);
 		assertThat(response.getStatusCode()).isEqualTo(200);
 	}
+
 
 	@Test
 	@DisplayName("Testing getting all bookings")
@@ -111,7 +112,7 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 	}
 	
 	@Test
-	@DisplayName("Testing adding a new booking")
+	@DisplayName("Testing deleting a new booking")
 	@Issue("006")
 	@TmsLink("006")
 	@Severity(SeverityLevel.MINOR)
@@ -133,7 +134,7 @@ public class RestfulBookerTest extends AbstractServiceTestSuite {
 		AuthentificationResponse createdAuth = authService.postAuth(auth).as(AuthentificationResponse.class);
 		
 		Response r2 = restfulBookerService.deleteBooking(createdBook.getBookingid(), createdAuth.getToken());
-		assertThat(r2.getStatusCode()).as("Deleting valid booking returns 200").isEqualTo(200);
+        assertThat(r2.getStatusCode()).isEqualTo(201);
 	}
 	
 	
