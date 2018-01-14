@@ -3,6 +3,7 @@ package com.simonk.gui.configurations.webdriver;
 
 import io.qameta.allure.Attachment;
 
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
@@ -43,6 +44,7 @@ public class WebDriverHooks {
 	
 	
 	@After
+	@Step("Checking if attachments are necessary")
 	public void add_failure_attachments_if_needed(Scenario scenario) {
 		LOG.debug("[END OF SCENARIO] " + scenario.getId());
 		if (scenario.isFailed()) {
