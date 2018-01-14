@@ -44,7 +44,6 @@ public class WebDriverHooks {
 	
 	
 	@After
-	@Step("Checking if attachments are necessary")
 	public void add_failure_attachments_if_needed(Scenario scenario) {
 		LOG.debug("[END OF SCENARIO] " + scenario.getId());
 		if (scenario.isFailed()) {
