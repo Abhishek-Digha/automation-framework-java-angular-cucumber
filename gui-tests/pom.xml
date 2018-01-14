@@ -127,7 +127,7 @@
 						</property>
 					</systemProperties>
 					<forkCount>${parallelfork.count}</forkCount>
-					<reuseForks>false</reuseForks>
+					<reuseForks>true</reuseForks>
 					<includes>
 						<include>**/*IT.class</include>
 					</includes>
