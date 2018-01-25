@@ -53,6 +53,7 @@ Getting Started:
 1. Download and install maven -> `mvn` in command line should not return unknown command
 2. Download and install the java JDK
 3. Clone the project: `https://github.com/symonk/Auto-angular.git`
+3.5 Install allure command line generator, (2.5.0 as of 25/01/2018)
 4. Start running tests using the .bat files in the project directory
 5. Modify the code to meet your needs and happy testing!
 6. Please contribute/fork if you find it useful!
